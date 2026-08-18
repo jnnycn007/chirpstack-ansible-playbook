@@ -1,18 +1,16 @@
 - name: install python
   hosts:
     - chirpstack
-    - vagrant
   become: 'yes'
   gather_facts: 'no'
 
   tasks:
-    - name: install python-minimal
+    - name: install python3-minimal
       raw: apt-get install -y python3-minimal
 
 - name: single-server ChirpStack setup
   hosts:
     - chirpstack
-    - vagrant
   roles:
     - base
     - chirpstack-ca

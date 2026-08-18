@@ -1,3 +1,12 @@
+- name: add ChirpStack repository
+  deb822_repository:
+    name: chirpstack
+    types: deb
+    uris: https://artifacts.chirpstack.io/packages/4.x/deb
+    suites: stable
+    components: main
+    signed_by: https://artifacts.chirpstack.io/packages/chirpstack.key
+
 - name: upgrade installed packages
   ansible.builtin.apt:
     update_cache: 'yes'
@@ -12,12 +21,3 @@
     - gpg
     - golang-cfssl
 
-- name: import ChirpStack gpg key
-  ansible.builtin.apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 1CE2AFD36DBCCA00
-
-- name: add ChirpStack deb repository
-  ansible.builtin.apt_repository:
-    repo: deb https://artifacts.chirpstack.io/packages/4.x/deb stable main
-  when: apt.use_chirpstack_repo

@@ -8,6 +8,9 @@
   ansible.builtin.template:
     src: acl
     dest: /etc/mosquitto/acl
+    owner: mosquitto
+    group: mosquitto
+    mode: "0700"
   notify:
     - restart mosquitto
 
